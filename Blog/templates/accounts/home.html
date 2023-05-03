@@ -4,18 +4,6 @@
 
 {% block content %}
 
-<br>
-<div class="container">
-  {% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-warning alert-dismissible fade show border border-warning" role="alert">
-    {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  </div>
-  {% endfor%}
-  {% endif%}
-</div>
 
 <section class="home" id="home">
   <div class="home-content">
@@ -39,4 +27,16 @@
   </div>
 </section>
 
+<section class="post" id="post">
+  <div class="post-content">
+  <h3>POST</h3>
+  <ul>
+    {% for post in object_list  %}
+    <li><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> - {{ post.author.first_name }}
+      {{ post.author.last_name }}<br>
+      {{ post.body }}</li>
+    {% endfor %}
+  </ul>
+</div>
+</section>
   {% endblock content %}

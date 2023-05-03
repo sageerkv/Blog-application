@@ -15,6 +15,9 @@ from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 from django.db.models.query_utils import Q
 
+from django.views.generic import ListView, DetailView
+from . models import Post
+
 # Create your views here.
 
 def activate(request, uidb64, token):
@@ -225,9 +228,18 @@ def logoutpage(request):
     messages.success(request, ("You Where Logged Out!"))
     return redirect('home')
 
-def home(request):
-    return render(request,'accounts/home.html')
+# def home(request):
+#     return render(request,'accounts/home.html')
 
 @login_required
 def index(request):
     return render(request,'index.html')
+
+class HomeView(ListView):
+    model = Post
+    template_name = 'accounts/home.html'
+
+
+class ArticleDetailView(DetailView):
+    model = Post
+    template_name = 'accounts/article_details.html'

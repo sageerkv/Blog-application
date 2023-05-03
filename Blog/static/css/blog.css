@@ -191,6 +191,30 @@ span {
 }
 
 
+/* post */
+
+.post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post-content h3 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--main-color);
+    text-align: center;
+}
+
+.post-content ul {
+    border: .2rem solid var(--text-color);
+    padding: 6rem;
+    border-radius: 2rem;
+}
+
+.post-content ul li{
+    font-size: 1.6rem;
+}
+
 /* breakpoint */
 
 @media (max-width: 1200px) {

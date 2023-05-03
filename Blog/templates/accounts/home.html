@@ -1,0 +1,42 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}home{% endblock title %}
+
+{% block content %}
+
+<br>
+<div class="container">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-warning alert-dismissible fade show border border-warning" role="alert">
+    {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+  {% endfor%}
+  {% endif%}
+</div>
+
+<section class="home" id="home">
+  <div class="home-content">
+      <h3>Welcome to</h3>
+      <h1>Foody Blog</h1>
+      <h3>And <span class="multiple-text"></span></h3>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis magnam minima architecto. Exercitationem sed earum,
+      neque autem aliquam tempore dolore voluptate perspiciatis obcaecati non a ut veritatis cum perferendis eos.</p>
+      <div class="social-media">
+          <a href="#"><i class='bx bxl-facebook' ></i></a>
+          <a href="#"><i class='bx bxl-instagram' ></i></a>
+          <a href="#"><i class='bx bxl-youtube' ></i></a>
+          <a href="#"><i class='bx bxl-twitter' ></i></a>
+      </div>
+      <a href="{% url 'register' %}" class="btn">Create your account</a>
+  </div>
+  
+  <div class="home-img">
+      <img src="{% static '/images/blog.png' %}" alt="profile">
+  </div>
+</section>
+
+  {% endblock content %}

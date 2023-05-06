@@ -15,7 +15,7 @@ from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 from django.db.models.query_utils import Q
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from . models import Post
 
 # Create your views here.
@@ -243,3 +243,8 @@ class HomeView(ListView):
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'accounts/article_details.html'
+
+class AddPostView(CreateView):
+    model = Post
+    template_name = 'add_post.html'
+    fields = '__all__'

@@ -32,7 +32,7 @@
   <h3>POST</h3>
   <ul>
     {% for post in object_list  %}
-    <li><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> - {{ post.author.first_name }}
+    <li><a href="{% url 'article-detail' post.pk %}" style="color: var(--main-color);font-weight: 800;">{{ post.title }}</a> - {{ post.author.first_name }}
       {{ post.author.last_name }}<br>
       {{ post.body }}</li>
     {% endfor %}
@@ -40,3 +40,4 @@
 </div>
 </section>
   {% endblock content %}
+  

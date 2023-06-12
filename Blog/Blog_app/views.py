@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate , login, logout, get_user_model
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
@@ -15,8 +14,9 @@ from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 from django.db.models.query_utils import Q
 
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from . models import Post
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -91,7 +91,7 @@ def loginpage(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"You have been logged in....")
-                return redirect('index')
+                return redirect('home')
         else:
             for key, error in list(form.errors.items()):
                  if key == 'captcha' and error[0] == 'This field is required.':
@@ -228,23 +228,29 @@ def logoutpage(request):
     messages.success(request, ("You Where Logged Out!"))
     return redirect('home')
 
-# def home(request):
-#     return render(request,'accounts/home.html')
-
-@login_required
-def index(request):
-    return render(request,'index.html')
 
 class HomeView(ListView):
     model = Post
-    template_name = 'accounts/home.html'
+    template_name = 'home.html'
+    ordering = ['id']
+    # ordering = ['post_date']
 
 
 class ArticleDetailView(DetailView):
     model = Post
-    template_name = 'accounts/article_details.html'
+    template_name = 'article_details.html'
 
 class AddPostView(CreateView):
     model = Post
     template_name = 'add_post.html'
     fields = '__all__'
+
+class UpdatePostView(UpdateView):
+    model = Post
+    template_name = 'update_post.html'
+    fields = ['title', 'title_tag', 'body']
+
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'delete_post.html'
+    success_url = reverse_lazy('home')

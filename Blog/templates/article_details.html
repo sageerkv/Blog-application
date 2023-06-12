@@ -1,4 +1,4 @@
-{% extends 'accounts/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block title %}{{ post.title_tag }}{% endblock title %}
 
@@ -8,7 +8,12 @@
 
 <section class="article" id="article">
     <h1 style="color: var(--main-color);" class="fw-bold fs-1">{{ post.title }}</h1>
-    <small class="fs-4 fw-semibold">By: {{ post.author.first_name }} {{ post.author.last_name }}
+    <small class="fs-5 fw-semibold">By: 
+        {{ post.author.first_name }} 
+        {{ post.author.last_name }} - 
+        {{ post.post_date }} - 
+    <a href="{% url 'update_post' post.pk %}">(Edit)</a>
+    <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
     </small><br/>
     <hr>
     <br/>

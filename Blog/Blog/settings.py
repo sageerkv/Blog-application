@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Blog_app',
+    'members_app',
     'crispy_forms',
     'crispy_bootstrap5',
-    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -141,21 +141,6 @@ MEDIA_URL = '/media/'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-AUTHENTICATION_BACKENDS = ['Blog_app.backends.EmailBackend']
 
-RECAPTCHA_PUBLIC_KEY = '6Lcc7mwlAAAAAKRTouvq14R1PV9XTnLYj0TDuk9I'
-RECAPTCHA_PRIVATE_KEY = '6Lcc7mwlAAAAALN2U2DR7HRtUK630bCZa6B3yhlK'
-SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
-
-
-# SMTP Configuration
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_FORM = 'citycarehospital996@gmail.com'
-EMAIL_HOST_USER = 'citycarehospital996@gmail.com'
-EMAIL_HOST_PASSWORD = 'tgualcjrlvxblbgr'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-PASSWORD_RESET_TIMEOUT = 14400
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'

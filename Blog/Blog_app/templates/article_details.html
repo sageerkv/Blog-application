@@ -11,13 +11,15 @@
     <small class="fs-5 fw-semibold">By: 
         {{ post.author.first_name }} 
         {{ post.author.last_name }} - 
-        {{ post.post_date }} - 
+        {{ post.post_date }}
+        {% if user.is_authenticated %} - 
     <a href="{% url 'update_post' post.pk %}">(Edit)</a>
     <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
     </small><br/>
+    {% endif %}
     <hr>
     <br/>
-    <p class="fs-3 ">{{ post.body }}</p>
+    <p class="fs-3 ">{{ post.body|safe }}</p>
 
     <br/>
     <br/>

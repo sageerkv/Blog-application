@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .forms import PostForm
-from . models import Post
+from .forms import PostForm, EditForm
+from . models import Post, Category
 from django.urls import reverse_lazy
 
 # Create your views here.
@@ -13,6 +13,10 @@ class HomeView(ListView):
     template_name = 'home.html'
     ordering = ['id']
     # ordering = ['post_date']
+
+def CategoryView(request, cats):
+    category_posts = Post.objects.filter(category=cats)
+    return render(request, 'categories.html', {'cats':cats.title(), 'category_posts': category_posts})
 
 
 class ArticleDetailView(DetailView):
@@ -24,6 +28,12 @@ class AddPostView(CreateView):
     form_class = PostForm
     template_name = 'add_post.html'
     # fields = '__all__'
+
+class AddCategoryView(CreateView):
+    model = Category
+    # form_class = PostForm
+    template_name = 'add_category.html'
+    fields = '__all__'
 
 class UpdatePostView(UpdateView):
     model = Post

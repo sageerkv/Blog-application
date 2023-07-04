@@ -8,29 +8,34 @@
 <section class="Categories" id="Categories">
   <div class="post-content">
     {% if category_posts %}
-        <h3> {{ cats }}</h3>
-        <br>
-        <ul>
+      <h3>{{ cats }}</h3>
+      <br>
+      <ul>
         {% for post in category_posts %}
-        <li><a href="{% url 'article-detail' post.pk %}" style="color: var(--main-color);font-weight: 800;">{{ post.title }}</a>
-            - {{ post.author.first_name }}
-            {{ post.author.last_name }} - 
-            {{ post.post_date }}
-            {% if user.is_authenticated %} -
-            <small><a href="{% url 'update_post' post.pk %}">(Edit)</a>
-            <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
-            </small><br>
+          <li>
+            <a href="{% url 'article-detail' post.pk %}" style="color: var(--main-color); font-weight: 800;">
+              {{ post.title }}
+            </a>
+            - {{ post.author.first_name }} {{ post.author.last_name }} - {{ post.post_date }}
+            {% if user.is_authenticated %}
+              - <small>
+                <a href="{% url 'update_post' post.pk %}">(Edit)</a>
+                <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
+              </small>
             {% endif %}
-            {{ post.body|slice:":200"|safe }}</li>
+            <br>
+            {{ post.body|slice:":200"|safe }}
+          </li>
         {% endfor %}
-        </ul>
+      </ul>
     {% else %}
-        <h2>Sorry this page does not exist...</h2>
+      <h2>Sorry, this page does not exist...</h2>
     {% endif %}
-</div>
-<br>
-    <a href="{% url 'home' %}" class="fs-2 btn btn-primary">back</a>
+  </div>
+  <br>
+  <a href="{% url 'home' %}" class="fs-2 btn btn-primary">Back</a>
 </section>
+
 
 
 {% endblock content %}

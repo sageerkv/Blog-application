@@ -25,13 +25,17 @@
         </form>
       </div>
 
+      <script>
+        var name = "{{ user.username }}";
+        document.getElementById("elder").value = name;
+      </script>
       {% else %}
 
       <h2>You're not allowed here!  (and you know it...)</h2>
      
       {% endif %}
 <br>
-    <a href="{% url 'home' %}" class="fs-2 btn btn-primary">back</a>
+    <a href="{% url 'home' %}" class="fs-2 btn btn-primary">Back</a>
 </section>
 
 {% endblock content %}

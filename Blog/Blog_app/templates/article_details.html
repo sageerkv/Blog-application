@@ -12,10 +12,14 @@
         {{ post.author.first_name }} 
         {{ post.author.last_name }} - 
         {{ post.post_date }}
-        {% if user.is_authenticated %} - 
+
+        {% if user.is_authenticated %}
+
+        {% if user.id == post.author.id %} - 
     <a href="{% url 'update_post' post.pk %}">(Edit)</a>
     <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
     </small><br/>
+    {% endif %}
     {% endif %}
     <hr>
     <br/>
@@ -23,7 +27,34 @@
 
     <br/>
     <br/>
-    <a href="{% url 'home' %}" class="fs-2 btn btn-primary">back</a>
+    <a href="{% url 'home' %}" class="fs-2 btn btn-primary">Back</a>
+    
+    <br/><br/>
+    <hr>
+    <br/>
+    <form action="{% url 'like_post' post.pk %}" method="POST">
+        {% csrf_token %}
+
+    {% if user.is_authenticated %}
+        {% if liked %}
+
+            <button type="submit", name="post_id", value="{{ post.id }}", 
+            class="btn btn-danger btn-sm">Unlike</button>
+
+        {% else %}
+
+            <button type="submit", name="post_id", value="{{ post.id }}", 
+            class="btn btn-primary btn-sm">Like</button> 
+        
+        {% endif %}
+    {% else %}
+        <small><a href="{% url 'login' %}#login">Login</a> to Like</small>
+    {% endif %}
+
+        - {{ total_likes }} Likes
+
+    </form>
+
 </section>
 
 {% endblock content %}

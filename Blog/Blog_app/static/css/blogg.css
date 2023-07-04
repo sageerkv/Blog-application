@@ -40,34 +40,78 @@ section {
     left: 0;
     width: 100%;
     padding: 2rem 9%;
-    background: var(---color);
+    background: var(--color);
     display: flex;
     justify-content: space-between;
-}
-
-.header .sticky {
-    border-bottom: .1rem solid rgba(0,0,0,.2);
-}
-
-.logo {
+  }
+  
+  .header.sticky {
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+  }
+  
+  .logo {
     font-size: 2.5rem;
     color: var(--text-color);
     font-weight: 600;
     cursor: default;
-}
-
-.navbar a{
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar a {
     font-size: 1.7rem;
     color: var(--text-color);
     margin-left: 4rem;
     transition: 2s;
-}
-
-.navbar a:hover,
-.navbar a.active {
+    position: relative; /* Added */
+  }
+  
+  .navbar a:hover,
+  .navbar a.active {
     color: var(--main-color);
-}
-
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bg-color);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+    padding: 1rem;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    z-index: 1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-content a {
+    display: block;
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    font-size: 1.7rem;
+    transition: 2s;
+    white-space: nowrap; /* Prevents text wrapping */
+    cursor: pointer; /* Add cursor style for clickable items */
+  }
+  
+  .dropdown-content a:hover {
+    background-color: var(--second-bg-color);
+    color: var(--main-color);
+  }
+  
+  
+  
 #menu-icon {
     font-size: 3.6rem;
     color: var(--text-color);

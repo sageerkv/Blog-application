@@ -9,26 +9,33 @@
 
 <section class="article" id="article">
   {% if user.is_authenticated %}
-    <h1 style="color: var(--main-color);" class="fw-bold fs-1">Update Post....</h1>
-    <hr>
-    <div class="container w-6 0 p-3 my-20 border rounded mb-4" style="background-color:#d8d6d6 ;">
-        <form action="" method="POST" autocomplete="off" class="fw-semibold">
-          {% csrf_token %}
-          <fieldset class="form-group">
-            {{ form|crispy }}
-          </fieldset>
-                  <div class="form-group">
-                      <button type="submit" class="btn btn-lg col-md-2" style="background:#2268ff ; color:#fff">Post</button>
-                  </div>
-        </form>
-      </div>
- {% else %}
+    {% if user.id == post.author.id %}
+      <h1 style="color: var(--main-color);" class="fw-bold fs-1">Update Post....</h1>
+      <hr>
+      <div class="container w-6 0 p-3 my-20 border rounded mb-4" style="background-color:#d8d6d6 ;">
+          <form action="" method="POST" autocomplete="off" class="fw-semibold">
+            {% csrf_token %}
+            <fieldset class="form-group">
+              {{ form|crispy }}
+            </fieldset>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg col-md-2" style="background:#2268ff ; color:#fff">Post</button>
+                    </div>
+          </form>
+        </div>
+    {% else %}
 
- <h2>You're not allowed here!  (and you know it...)</h2>
+    <h2>You're not allowed here!  (and you know it...)</h2>
+  
+    {% endif %}
 
-      {% endif %}
+  {% else %} 
+
+    <h2>You're not allowed here!  (and you know it...)</h2>    
+
+  {% endif %}
 <br>
-    <a href="{% url 'home' %}" class="fs-2 btn btn-primary">back</a>
+    <a href="{% url 'home' %}" class="fs-2 btn btn-primary">Back</a>
 </section>
 
 {% endblock content %}
